@@ -1,0 +1,13 @@
+# Mark Calculator
+asMark = int(input("Please enter your assessment mark: "))
+caMark = int(input("Please enter your continuous assessment mark: "))
+
+#half-semester mark
+half_semesterMark = (asMark+caMark)/2
+print(half_semesterMark)
+if 50>half_semesterMark<100:
+    print("You do not qualify for the final exam")
+else:
+    print("You do qualify for the final exam")
+    final_half_semesterMark = (half_semesterMark/100)*40
+    print("You currently have a mark of ",final_half_semesterMark," towards your final year mark")
