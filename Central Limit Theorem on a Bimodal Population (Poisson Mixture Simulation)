@@ -1,0 +1,37 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+QuickServiceCustomers = 6000
+LambdaQuickServiceCustomers = 15
+FullServiceCustomers = 3000
+LambdaFullServiceCustomers = 45
+
+population_data = np.concatenate([
+    np.random.poisson(LambdaQuickServiceCustomers, QuickServiceCustomers),
+    np.random.poisson(LambdaFullServiceCustomers, FullServiceCustomers)
+])
+true_pop_mean_theoretical = 27.00
+
+SampleSize = 30
+NumberOfSamples = 500
+
+SampleMeans = []
+TruePopulationMeanTheoretical = 27.00
+
+for _ in range(NumberOfSamples):
+    sample = np.random.choice(population_data, size=SampleSize, replace=False)
+    SampleMeans.append(np.mean(sample))
+
+MeanOfSampleMeans = np.mean(SampleMeans)
+
+plt.figure(figsize=(10, 6))
+plt.hist(SampleMeans, bins=25, color='#d73027', edgecolor='black', density=True, alpha=0.8)
+plt.title(f'Sampling Distribution of Sample Means (Sample size={SampleSize}, Number of Samples={NumberOfSamples})', fontsize=16)
+plt.xlabel('Sample Mean Wait Time (Minutes)', fontsize=14)
+plt.ylabel('Density', fontsize=14)
+plt.axvline(TruePopulationMeanTheoretical, color='purple', linestyle='solid', linewidth=3, label=f'Theoretical True Population Mean $\\mu={TruePopulationMeanTheoretical:.2f}$')
+plt.axvline(MeanOfSampleMeans, color='black', linestyle='dashed', linewidth=2, label=f'Mean of Sample Means $\\mu_{{\\bar{{x}}}} \\approx {MeanOfSampleMeans:.2f}$')
+plt.legend()
+plt.grid(axis='y', alpha=0.5)
+plt.tight_layout()
+plt.show()
