@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+QuickServiceCustomers = 6000
+LambdaQuickServiceCustomers = 15
+FullServiceCustomers = 3000
+LambdaFullServiceCustomers = 45
+
+QuickServiceTimes = np.random.poisson(LambdaQuickServiceCustomers, QuickServiceCustomers)
+FullServiceTimes = np.random.poisson(LambdaFullServiceCustomers, FullServiceCustomers)
+
+population_data = np.concatenate([QuickServiceTimes, FullServiceTimes])
+
+TruePopulationMean = (0.60 * LambdaQuickServiceCustomers) + (0.40 * LambdaFullServiceCustomers)
+
+plt.figure(figsize=(10, 6))
+plt.hist(population_data, bins=50, density=True, color='#2c7bb6', edgecolor='black', alpha=0.7)
+plt.title('Population Distribution of Customer Wait Times (Bimodal)', fontsize=16)
+plt.xlabel('Wait Time (Minutes)', fontsize=14)
+plt.ylabel('Density', fontsize=14)
+plt.axvline(LambdaQuickServiceCustomers, color='green', linestyle='dashed', linewidth=2, label=f'Quick Service $\\lambda={LambdaQuickServiceCustomers}$')
+plt.axvline(LambdaFullServiceCustomers, color='red', linestyle='dashed', linewidth=2, label=f'Full Service $\\lambda={LambdaFullServiceCustomers}$')
+plt.axvline(TruePopulationMean, color='purple', linestyle='solid', linewidth=3, label=f'Population Mean $\\mu \\approx {TruePopulationMean:.2f}$')
+plt.legend()
+plt.grid(axis='y', alpha=0.5)
+plt.tight_layout()
+plt.show()
