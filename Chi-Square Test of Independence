@@ -1,0 +1,37 @@
+import numpy as np
+from scipy.stats import chi2_contingency
+
+observed_frequencies = np.array([
+    [145, 55],
+    [120, 80]
+])
+
+# Calculate Row and Column Totals
+row_totals = observed_frequencies.sum(axis=1)
+column_totals = observed_frequencies.sum(axis=0)
+grand_total = observed_frequencies.sum()
+
+print("____________Contingency Table and Totals____________")
+print(f"Row Totals (In-Person, Online): {row_totals}")
+print(f"Column Totals (Pass, Fail): {column_totals}")
+print(f"Grand Total: {grand_total}\n")
+
+chi2_statistic, p_value, degrees_of_freedom, expected_frequencies = chi2_contingency(
+    observed_frequencies,
+    correction=False
+)
+
+# Degrees of freedom (dof)
+print(f"Degrees of Freedom (df): {degrees_of_freedom}")
+
+# Expected Frequencies (E)
+print("\nExpected Frequencies (E):")
+# Expected frequencies are derived from: (Row Total * Column Total) / Grand Total
+print(expected_frequencies)
+
+# Chi-square Test Statistic (chi2)
+print(f"\nChi-square Test Statistic (χ²): {chi2_statistic:.4f}")
+
+# P-value
+print(f"P-value: {p_value:.6f}")
+
