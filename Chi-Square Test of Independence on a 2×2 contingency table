@@ -1,0 +1,15 @@
+import numpy as np
+from scipy.stats import chi2_contingency
+
+data = np.array([
+    [145, 55],
+    [120, 80]
+])
+
+chi2, p_value, dof, expected = chi2_contingency(data)
+
+print(f"Contingency Table (Observed Frequencies):\n{data}")
+print(f"\nChi-square statistic: {chi2:.4f}")
+print(f"P-value: {p_value:.4f}")
+print(f"Degrees of Freedom: {dof}")
+print(f"Expected Frequencies:\n{expected.round(2)}")
