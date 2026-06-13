@@ -1,0 +1,15 @@
+while True:
+    response = input("Would you like to calculate your marks(Y/N): ").lower()
+    if response == "y":
+        print("Please enter your CA mark: ")
+        caMark = int(input())
+        print("Please enter your assignment mark: ")
+        assign_Mark = int(input())
+        print("Please enter the percentage your DP mark contributes towards the final semester mark: ")
+        percentage_Count = int(input())
+        dpMark = (caMark + assign_Mark)/2
+        final = dpMark/100 *percentage_Count
+        print(f"You currently have {final}% towards your final semester mark")
+    else:
+        print("Bye:)")
+        break
